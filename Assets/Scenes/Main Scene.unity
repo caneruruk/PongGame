@@ -268,6 +268,8 @@ GameObject:
   - component: {fileID: 530266403}
   - component: {fileID: 530266406}
   - component: {fileID: 530266405}
+  - component: {fileID: 530266408}
+  - component: {fileID: 530266407}
   m_Layer: 0
   m_Name: Right Rod
   m_TagString: Untagged
@@ -373,6 +375,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: 63
   velocity: {x: 0, y: 5, z: 0}
+--- !u!114 &530266407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530266402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55c8cf24cc12bdd6fa83f81c2cbf3cdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  y: -5
+--- !u!114 &530266408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530266402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7eaa13e25bbddd6faa39912851f8696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  y: 5
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,6 +497,8 @@ GameObject:
   - component: {fileID: 643811721}
   - component: {fileID: 643811723}
   - component: {fileID: 643811724}
+  - component: {fileID: 643811725}
+  - component: {fileID: 643811726}
   m_Layer: 0
   m_Name: Left Rod
   m_TagString: Untagged
@@ -574,6 +604,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: 33
   velocity: {x: 0, y: -5, z: 0}
+--- !u!114 &643811725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643811720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7eaa13e25bbddd6faa39912851f8696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  y: 5
+--- !u!114 &643811726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643811720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55c8cf24cc12bdd6fa83f81c2cbf3cdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  y: -5
 --- !u!1 &711365007
 GameObject:
   m_ObjectHideFlags: 0
