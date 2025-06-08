@@ -6,6 +6,8 @@ public class Ball : MonoBehaviour
     [SerializeField] private Vector3 direction;
     private float minY;
     private float maxY;
+    private float maxX;
+    private float minX;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,6 +17,11 @@ public class Ball : MonoBehaviour
 
         maxY = cameraPosition.y + halfHeight;
         minY = cameraPosition.y - halfHeight;
+
+        float halfWidth = halfHeight * Camera.main.aspect;
+
+        maxX = cameraPosition.x + halfWidth;
+        minX = cameraPosition.x - halfWidth;
     }
 
     // Update is called once per frame
@@ -33,6 +40,19 @@ public class Ball : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, maxY - transform.lossyScale.y / 2, transform.position.z);
             direction.y = -direction.y;
+        }
+
+        // Reset when there is a point
+        if (transform.position.x - transform.lossyScale.x / 2 < minX)
+        {
+            transform.position = Vector3.zero;
+            direction.x = -direction.x;
+        }
+
+        if (transform.position.x + transform.lossyScale.x / 2 > maxX)
+        {
+            transform.position = Vector3.zero;
+            direction.x = -direction.x;
         }
     }
 }
