@@ -6,20 +6,8 @@ public class Rod : MonoBehaviour
     [SerializeField] private Key upKey;
     [SerializeField] private Key downKey;
     [SerializeField] private float pace;
-    private float minY;
-    private float maxY;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        float halfHeight = Camera.main.orthographicSize;
-        Vector3 cameraPosition = Camera.main.transform.position;
-
-        maxY = cameraPosition.y + halfHeight;
-        minY = cameraPosition.y - halfHeight;
-    }
-
-    // Update is called once per frame
+    private CameraBorders cameraBorders = new CameraBorders();
+    
     void Update()
     {
         // Movement
@@ -34,14 +22,14 @@ public class Rod : MonoBehaviour
         }
 
         // Stay in boundaries
-        if (transform.position.y - transform.lossyScale.y / 2 < minY)
+        if (transform.position.y - transform.lossyScale.y / 2 < cameraBorders.minY())
         {
-            transform.position = new Vector3(transform.position.x, minY + transform.lossyScale.y / 2, transform.position.z);
+            transform.position = new Vector3(transform.position.x, cameraBorders.minY() + transform.lossyScale.y / 2, transform.position.z);
         }
 
-        if (transform.position.y + transform.lossyScale.y / 2 > maxY)
+        if (transform.position.y + transform.lossyScale.y / 2 > cameraBorders.maxY())
         {
-            transform.position = new Vector3(transform.position.x, maxY - transform.lossyScale.y / 2, transform.position.z);
+            transform.position = new Vector3(transform.position.x, cameraBorders.maxY() - transform.lossyScale.y / 2, transform.position.z);
         }
     }
 }

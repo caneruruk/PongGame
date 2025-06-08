@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
@@ -7,25 +8,11 @@ public class Ball : MonoBehaviour
     [SerializeField] private float initialDirectionYMin = -1;
     [SerializeField] private string initialDirection = "left";
     private Vector3 directionVector;
-    private float minY;
-    private float maxY;
-    private float maxX;
-    private float minX;
+    private CameraBorders cameraBorders = new CameraBorders();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        float halfHeight = Camera.main.orthographicSize;
-        Vector3 cameraPosition = Camera.main.transform.position;
-
-        maxY = cameraPosition.y + halfHeight;
-        minY = cameraPosition.y - halfHeight;
-
-        float halfWidth = halfHeight * Camera.main.aspect;
-
-        maxX = cameraPosition.x + halfWidth;
-        minX = cameraPosition.x - halfWidth;
-
         SetRandomDirection(initialDirection);
     }
 
@@ -35,26 +22,26 @@ public class Ball : MonoBehaviour
         transform.position += directionVector * pace * Time.deltaTime;
 
         // Stay in boundaries
-        if (transform.position.y - transform.lossyScale.y / 2 < minY)
+        if (transform.position.y - transform.lossyScale.y / 2 < cameraBorders.minY())
         {
-            transform.position = new Vector3(transform.position.x, minY + transform.lossyScale.y / 2, transform.position.z);
+            transform.position = new Vector3(transform.position.x, cameraBorders.minY() + transform.lossyScale.y / 2, transform.position.z);
             directionVector.y = -directionVector.y;
         }
 
-        if (transform.position.y + transform.lossyScale.y / 2 > maxY)
+        if (transform.position.y + transform.lossyScale.y / 2 > cameraBorders.maxY())
         {
-            transform.position = new Vector3(transform.position.x, maxY - transform.lossyScale.y / 2, transform.position.z);
+            transform.position = new Vector3(transform.position.x, cameraBorders.maxY() - transform.lossyScale.y / 2, transform.position.z);
             directionVector.y = -directionVector.y;
         }
 
         // Reset when there is a point
-        if (transform.position.x - transform.lossyScale.x / 2 < minX)
+        if (transform.position.x - transform.lossyScale.x / 2 < cameraBorders.minX())
         {
             transform.position = Vector3.zero;
             SetRandomDirection("right");
         }
 
-        if (transform.position.x + transform.lossyScale.x / 2 > maxX)
+        if (transform.position.x + transform.lossyScale.x / 2 > cameraBorders.maxX())
         {
             transform.position = Vector3.zero;
             SetRandomDirection("left");
