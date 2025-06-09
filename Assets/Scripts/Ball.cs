@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Ball : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Ball : MonoBehaviour
     [SerializeField] private string initialDirection = "left";
     private Vector3 directionVector;
     private CameraBorders cameraBorders = new CameraBorders();
+    [SerializeField] private UnityEvent goneOutFromLeft;
+    [SerializeField ]private UnityEvent goneOutFromRight;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,12 +40,16 @@ public class Ball : MonoBehaviour
         // Reset when there is a point
         if (transform.position.x - transform.lossyScale.x / 2 < cameraBorders.minX())
         {
+            goneOutFromLeft.Invoke();
+
             transform.position = Vector3.zero;
             SetRandomDirection("right");
         }
 
         if (transform.position.x + transform.lossyScale.x / 2 > cameraBorders.maxX())
         {
+            goneOutFromRight.Invoke();
+
             transform.position = Vector3.zero;
             SetRandomDirection("left");
         }
