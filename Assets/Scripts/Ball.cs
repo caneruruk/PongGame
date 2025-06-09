@@ -52,12 +52,12 @@ public class Ball : MonoBehaviour
     {
         if (direction == "left")
         {
-            directionVector = new Vector3(-1, Random.Range(initialDirectionYMin, initialDirectionYMax), 0);
+            directionVector = new Vector3(-1, Random.Range(initialDirectionYMin, initialDirectionYMax), 0).normalized;
         }
 
         if (direction == "right")
         {
-            directionVector = new Vector3(1, Random.Range(initialDirectionYMin, initialDirectionYMax), 0);
+            directionVector = new Vector3(1, Random.Range(initialDirectionYMin, initialDirectionYMax), 0).normalized;
         }
     }
 }
