@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,7 +12,10 @@ public class Ball : MonoBehaviour
     private Vector3 directionVector;
     private CameraBorders cameraBorders = new CameraBorders();
     [SerializeField] private UnityEvent goneOutFromLeft;
-    [SerializeField ]private UnityEvent goneOutFromRight;
+    [SerializeField] private UnityEvent goneOutFromRight;
+    private bool isStop = true;
+    private float isStopPassedTime = 0;
+    [SerializeField] private float isStopDelayTime = 1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,7 +26,20 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += directionVector * pace * Time.deltaTime;
+        if (isStop)
+        {
+            isStopPassedTime += Time.deltaTime;
+
+            if (isStopPassedTime >= isStopDelayTime)
+            {
+                isStop = false;
+                isStopPassedTime = 0;
+            }
+        }
+        else
+        {
+            transform.position += directionVector * pace * Time.deltaTime;
+        }
 
         // Stay in boundaries
         if (transform.position.y - transform.lossyScale.y / 2 < cameraBorders.minY())
@@ -44,6 +61,8 @@ public class Ball : MonoBehaviour
 
             transform.position = Vector3.zero;
             SetRandomDirection("right");
+
+            isStop = true;
         }
 
         if (transform.position.x + transform.lossyScale.x / 2 > cameraBorders.maxX())
@@ -52,6 +71,8 @@ public class Ball : MonoBehaviour
 
             transform.position = Vector3.zero;
             SetRandomDirection("left");
+
+            isStop = true;
         }
     }
 
